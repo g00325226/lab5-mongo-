@@ -22,4 +22,7 @@ export class PostDetailsComponent implements OnInit {
 
 
    }
+   ondelete(id: string){
+    this.ps.deletePost(id).subscribe();
+    }
 }

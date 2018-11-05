@@ -4,7 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://admin:hello123@ds239903.mlab.com:39903/lab5';
+var mongoDB = 'mongodb://g00325226:GMITuser12@ds137913.mlab.com:37913/movie';
 mongoose.connect(mongoDB);
 
 var Schema = mongoose.Schema;
@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,POST,UPDATE,DELETE,OPTION");
     res.header("Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -57,6 +58,11 @@ app.get('/api/posts', function(req, res){
  
 })
 
+app.delete('/api/posts/:id', function(req, res){
+    console.log("Deleting items " + req.perams.id);
+        PostModel.deleteOne({_id: req.perams.id},
+        function(err){});
+    })
 
 var server = app.listen(8081, function () {
    var host = server.address().address
